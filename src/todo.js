@@ -11,6 +11,8 @@ taskSubmit.addEventListener("click", (evt) => {
   const task = taskValue.value;
   addTasks(task);
   taskValue.value = "";
+  // localStorageにデータを保存するメソッド
+  SaveLocalStorageData();
 });
 
 //タスクを作成
@@ -48,34 +50,25 @@ const addTasks = (task) => {
     evt.preventDefault();
     deleteTasks(deleteButton);
   });
-  // localStorageにデータを保存するメソッド
-  SaveLocalStorageData();
 };
 // localStorageにデータを保存する
 const SaveLocalStorageData = () => {
+  // データが0件の場合localStorageのデータをリセットする
+  localStorage.clear();
   const compleateStorageData = compleateList.getElementsByClassName(
     "compleateList"
   );
-  // データが0件の場合localStorageのデータをリセットする
-  if (compleateStorageData.length === 0) {
-    localStorage.removeItem("num");
-    localStorage.removeItem("compleateKey" + 0);
-  }
+  console.log(compleateStorageData);
+  console.log(compleateStorageData.length);
   let compleateStr = "";
   for (let i = 0; i < compleateStorageData.length; i++) {
+    console.log("A");
     localStorage.setItem("num", i);
     compleateStr = compleateStorageData[i].innerText;
     localStorage.setItem("compleateKey" + i, compleateStr);
   }
+
   const storageData = taskList.getElementsByClassName("listItems");
-
-  // データが0件の場合localStorageのデータをリセットする
-  if (storageData.length === 0) {
-    localStorage.removeItem("liLen");
-    localStorage.removeItem("key" + 0);
-    return;
-  }
-
   let str = "";
   for (let i = 0; i < storageData.length; i++) {
     localStorage.setItem("liLen", i);
@@ -98,7 +91,6 @@ const completeTasks = (completeButton, value) => {
   //作成したliタグにtextを追加
   li.innerText = text;
   compleateList.appendChild(li);
-
   SaveLocalStorageData();
 };
 //deleteボタンにタスクを消す機能を付与
@@ -109,20 +101,22 @@ const deleteTasks = (deleteButton) => {
 };
 
 // リロード時に以前の状態を維持する
-if (liLen || liLen === 0) {
-  for (let i = 0; i <= liLen; i++) {
-    addTasks(localStorage.getItem("key" + i));
-  }
-}
-// リロード時に以前の状態を維持する
 if (num || num === 0) {
   for (let i = 0; i <= num; i++) {
+    console.log(localStorage.getItem("compleateKey" + i));
     const text = localStorage.getItem("compleateKey" + i);
+    console.log(text + "abc");
     const li = document.createElement("li");
     li.className = "compleateList";
     //作成したliタグにtextを追加
     li.innerText = text;
     compleateList.appendChild(li);
+  }
+}
+// リロード時に以前の状態を維持する
+if (liLen || liLen === 0) {
+  for (let i = 0; i <= liLen; i++) {
+    addTasks(localStorage.getItem("key" + i));
   }
 }
 //All Deleteボタンをクリックし、イベントを発動（completeタスクが全て削除）
