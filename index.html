@@ -7,16 +7,25 @@
   </head>
 
   <body>
-    <div id="app">
-      <h1>TODO-List</h1>
-    </div>
-    <form>
-      <input class="task_value" type="text" />
-      <button class="task_submit" type="button">Add Task</button>
-    </form>
-    <div id="table">
-      <h2>Current Tasks</h2>
-      <ul class="task_list"></ul>
+    <div class="wrap">
+      <div id="app">
+        <h1>TODO-List</h1>
+      </div>
+      <form>
+        <input class="task_value" type="text" />
+        <button class="task_submit" type="button">Add Task</button>
+      </form>
+      <div class="contents">
+        <div id="table">
+          <h2>Current Tasks</h2>
+          <ul class="task_list"></ul>
+        </div>
+        <div id="table" class="position_table">
+          <h2>Compleated</h2>
+          <ul class="compleate_list"></ul>
+          <button id="comp" class="comp" type="button">All Deleate</button>
+        </div>
+      </div>
     </div>
     <script src="src/index.js"></script>
     <script src="src/todo.js"></script>
