@@ -1,16 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
+  <head>
+    <title>Parcel Sandbox</title>
+    <link rel="stylesheet" href="../src/styles.css" />
+    <meta charset="UTF-8" />
+  </head>
 
-<head>
-	<title>Parcel Sandbox</title>
-	<meta charset="UTF-8" />
-</head>
-
-<body>
-	<div id="app"></div>
-
-	<script src="src/index.js">
-	</script>
-</body>
-
+  <body>
+    <div id="app">
+      <h1>TODO-List</h1>
+    </div>
+    <form>
+      <input class="task_value" type="text" />
+      <button class="task_submit" type="button">Add Task</button>
+    </form>
+    <div id="table">
+      <h2>Current Tasks</h2>
+      <ul class="task_list"></ul>
+    </div>
+    <script src="src/index.js"></script>
+    <script src="src/todo.js"></script>
+  </body>
 </html>
